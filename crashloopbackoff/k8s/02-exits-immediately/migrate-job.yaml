@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: orders-migrate
+  namespace: shop
+spec:
+  backoffLimit: 2
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: migrate
+          image: ckthedevopsguy/orders-api:1.4.2
+          imagePullPolicy: IfNotPresent
+          command: ["python", "-u", "app.py", "--migrate"]
+          envFrom:
+            - secretRef: {name: orders-db}
