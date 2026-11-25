@@ -5,7 +5,7 @@ Every episode breaks a real service and fixes it live. Everything you need to fo
 
 | Episode | Folder |
 |---|---|
-| Kubernetes CrashLoopBackOff: 6 real causes, broken and fixed live | [`crashloopbackoff/`](crashloopbackoff/) |
+| [Kubernetes CrashLoopBackOff: 6 real causes, broken and fixed live](https://youtu.be/wVieweYn-cM) | [`crashloopbackoff/`](crashloopbackoff/) |
 
 You need a local Kubernetes cluster (Docker Desktop, kind or minikube) and `kubectl`.
 
