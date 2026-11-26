@@ -1,6 +1,6 @@
 # Kubernetes ImagePullBackOff: every cause, reproduced and fixed live
 
-🎬 Watch the video on [youtube.com/@CKTheDevOpsGuy](https://www.youtube.com/@CKTheDevOpsGuy)
+🎬 Watch the video: https://youtu.be/Q9iivK18sqQ
 
 The app is **orders-api** (`ckthedevopsguy/orders-api:1.4.2`), a small Python web service in the `shop` namespace.
 Every broken manifest here fails with the **real** error text you get on EKS, GKE, AKS or kubeadm.

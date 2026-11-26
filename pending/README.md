@@ -1,6 +1,6 @@
 # Kubernetes Pod Stuck in Pending: every cause, reproduced and fixed live
 
-🎬 Watch the video on [youtube.com/@CKTheDevOpsGuy](https://www.youtube.com/@CKTheDevOpsGuy)
+🎬 Watch the video: https://youtu.be/r_57sxRIfaE
 
 Every broken manifest here was reproduced on a [kind](https://kind.sigs.k8s.io/) cluster (Kubernetes v1.37), and the
 error texts in the video are the real ones. Docker Desktop's built-in Kubernetes works for most labs, but kind is
