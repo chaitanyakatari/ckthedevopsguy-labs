@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: reporter
+  namespace: shop
+spec:
+  serviceAccountName: reporter
+  terminationGracePeriodSeconds: 2
+  containers:
+    - name: reporter
+      image: curlimages/curl:8.11.1
+      command: [sleep, "86400"]
+      volumeMounts:
+        - {name: tools, mountPath: /opt/bin}
+  volumes:
+    - name: tools
+      configMap: {name: k8s-api, defaultMode: 0755}

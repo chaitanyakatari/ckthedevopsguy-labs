@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: shop
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: reporter
+  namespace: shop
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k8s-api
+  namespace: shop
+data:
+  k8s-api: |
+    #!/bin/sh
+    SA=/var/run/secrets/kubernetes.io/serviceaccount
+    if [ -f "$SA/token" ]; then
+      out=$(curl -s --cacert "$SA/ca.crt" -H "Authorization: Bearer $(cat "$SA/token")" -w '\n%{http_code}' "https://kubernetes.default.svc$1")
+    else
+      out=$(curl -sk -w '\n%{http_code}' "https://kubernetes.default.svc$1")
+    fi
+    code=$(echo "$out" | tail -1)
+    if [ "$code" = 200 ]; then
+      echo "HTTP 200 OK"
+    else
+      echo "HTTP $code: $(echo "$out" | sed -n 's/.*"message": "\(.*\)",$/\1/p' | sed 's/\\"/"/g')"
+    fi
