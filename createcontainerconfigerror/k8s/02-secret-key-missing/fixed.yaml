@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-api
+  namespace: shop
+  labels: {app: orders-api}
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: orders-api}}
+  template:
+    metadata: {labels: {app: orders-api}}
+    spec:
+      enableServiceLinks: false
+      containers:
+        - name: orders-api
+          image: ckthedevopsguy/orders-api:1.4.2
+          imagePullPolicy: IfNotPresent
+          ports: [{containerPort: 8080}]
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef: {name: orders-db, key: DATABASE_URL}
+            - name: LOG_LEVEL
+              valueFrom:
+                configMapKeyRef: {name: orders-config, key: LOG_LEVEL}
