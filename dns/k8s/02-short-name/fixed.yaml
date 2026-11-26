@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: web
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: storefront-config
+  namespace: web
+data:
+  ORDERS_URL: http://orders-api.shop/orders
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storefront
+  namespace: web
+  labels: {app: storefront}
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: storefront}}
+  template:
+    metadata: {labels: {app: storefront}}
+    spec:
+      containers:
+        - name: storefront
+          image: curlimages/curl:8.11.1
+          envFrom:
+            - configMapRef: {name: storefront-config}
+          command:
+            - sh
+            - -c
+            - |
+              while true; do
+                if out=$(curl -sS -m 3 -o /dev/null "$ORDERS_URL" 2>&1); then echo "$(date +%T) GET $ORDERS_URL ok"
+                else echo "$(date +%T) GET $ORDERS_URL failed: $out"; fi
+                sleep 5
+              done
