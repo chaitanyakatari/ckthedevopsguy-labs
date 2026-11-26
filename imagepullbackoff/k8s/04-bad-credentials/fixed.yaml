@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: regcred
+  namespace: shop
+type: kubernetes.io/dockerconfigjson
+stringData:
+  .dockerconfigjson: '{"auths":{"https://index.docker.io/v1/":{"auth":"Y2t0aGVkZXZvcHNndXk6ZXhwaXJlZC10b2tlbi1mcm9tLTIwMjQ="}}}'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-api
+  namespace: shop
+  labels: {app: orders-api}
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: orders-api}}
+  template:
+    metadata: {labels: {app: orders-api}}
+    spec:
+      enableServiceLinks: false
+      containers:
+        - name: orders-api
+          image: ckthedevopsguy/orders-api:1.4.2
+          imagePullPolicy: Always
+          ports: [{containerPort: 8080}]
+          envFrom:
+            - secretRef: {name: orders-db}
