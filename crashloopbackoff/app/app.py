@@ -1,4 +1,4 @@
-"""orders-api: small HTTP service used across the CrashLoopBackOff episodes.
+"""orders-api: small HTTP service used across the CrashLoopBackOff lab.
 
 Startup sequence (each step is a real failure point):
   1. read required config (DATABASE_URL)

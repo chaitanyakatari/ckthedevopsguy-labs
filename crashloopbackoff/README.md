@@ -1,6 +1,6 @@
 # Kubernetes CrashLoopBackOff: 6 real causes, broken and fixed live
 
-🎬 Watch the episode: https://youtu.be/wVieweYn-cM
+🎬 Watch the video: https://youtu.be/wVieweYn-cM
 
 The app is **orders-api**, a small Python web service in the `shop` namespace. It reads `DATABASE_URL`
 from a Secret, connects to Redis, and serves `/healthz` and `/orders` on port 8080.
