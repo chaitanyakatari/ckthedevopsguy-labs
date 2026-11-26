@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load
+  namespace: shop
+  labels: {app: load}
+spec:
+  replicas: 2
+  selector: {matchLabels: {app: load}}
+  template:
+    metadata: {labels: {app: load}}
+    spec:
+      containers:
+        - name: load
+          image: curlimages/curl:8.11.1
+          command: [sh, -c, 'while true; do curl -s -o /dev/null http://orders-api/orders; done']
