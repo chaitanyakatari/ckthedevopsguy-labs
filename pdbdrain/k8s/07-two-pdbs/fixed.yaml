@@ -1,0 +1,20 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: orders-api
+  namespace: shop
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels: {app: orders-api}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: shop-apps
+  namespace: shop
+spec:
+  maxUnavailable: 1
+  selector:
+    matchExpressions:
+      - {key: app, operator: In, values: [redis]}

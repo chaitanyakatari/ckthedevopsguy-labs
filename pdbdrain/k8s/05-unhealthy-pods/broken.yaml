@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-api
+  namespace: shop
+  labels: {app: orders-api}
+spec:
+  replicas: 3
+  selector: {matchLabels: {app: orders-api}}
+  template:
+    metadata: {labels: {app: orders-api}}
+    spec:
+      enableServiceLinks: false
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector: {matchLabels: {app: orders-api}}
+      containers:
+        - name: orders-api
+          image: ckthedevopsguy/orders-api:1.5.1
+          imagePullPolicy: IfNotPresent
+          ports: [{containerPort: 8080}]
+          envFrom:
+            - secretRef: {name: orders-db}
+          readinessProbe:
+            httpGet: {path: /ready-check, port: 8080}
+            periodSeconds: 2
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: orders-api
+  namespace: shop
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels: {app: orders-api}

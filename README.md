@@ -5,6 +5,7 @@ Each video takes one real error, breaks a real service every way it can fail, an
 
 | Video | Folder |
 |---|---|
+| [kubectl drain Blocked by a PodDisruptionBudget: every cause, reproduced and fixed live](https://www.youtube.com/@CKTheDevOpsGuy) | [`pdbdrain/`](pdbdrain/) |
 | [Kubernetes CrashLoopBackOff: 6 real causes, broken and fixed live](https://youtu.be/wVieweYn-cM) | [`crashloopbackoff/`](crashloopbackoff/) |
 | [Kubernetes ImagePullBackOff: every cause, reproduced and fixed live](https://youtu.be/Q9iivK18sqQ) | [`imagepullbackoff/`](imagepullbackoff/) |
 | [Kubernetes Pod Stuck in Pending: every cause, reproduced and fixed live](https://youtu.be/r_57sxRIfaE) | [`pending/`](pending/) |

@@ -1,0 +1,9 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: orders-api
+  namespace: shop
+spec:
+  minAvailable: 3
+  selector:
+    matchLabels: {app: orders-api}
