@@ -1,6 +1,6 @@
 # kubectl drain Blocked by a PodDisruptionBudget: every cause, reproduced and fixed live
 
-🎬 Watch the video on [youtube.com/@CKTheDevOpsGuy](https://www.youtube.com/@CKTheDevOpsGuy)
+🎬 Watch the video: https://youtu.be/s2DACOfRuUk
 
 Every broken manifest here was reproduced on a [kind](https://kind.sigs.k8s.io/) cluster with **3 worker nodes**
 (Kubernetes v1.37), and the error texts in the video are the real ones. A drain needs somewhere for pods to go, so a
