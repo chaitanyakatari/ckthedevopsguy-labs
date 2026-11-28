@@ -1,10 +1,11 @@
 # CK The DevOps Guy: Labs
 
 Manifests and sample apps from the videos on **[youtube.com/@CKTheDevOpsGuy](https://www.youtube.com/@CKTheDevOpsGuy)**.
-Each video takes one real error, breaks a real service every way it can fail, and fixes it live. Everything you need to follow along is here.
+Each video takes one real error, reproduces its real causes on a real service, and fixes each one live. Everything you need to follow along is here.
 
 | Video | Folder |
 |---|---|
+| [Terraform Error acquiring the state lock: 7 causes on an S3 backend, fixed live](https://youtu.be/gZGaUoDeQzo) | [`terraform-statelock/`](terraform-statelock/) |
 | [Kubernetes Ingress 502, 503, 504: every cause, reproduced and fixed live](https://youtu.be/RBaryU1dW6o) | [`ingress/`](ingress/) |
 | [Kubernetes: 2 more causes, from the comments](https://youtu.be/U8N-DLM4oKc) | [`fromcomments/`](fromcomments/) |
 | [Kubernetes Pod Evicted: every cause, reproduced and fixed live](https://youtu.be/HBmxbUFjAyA) | [`evicted/`](evicted/) |

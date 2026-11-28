@@ -1,0 +1,18 @@
+name: deploy-payments
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: terraform-tfstate-payments
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: hashicorp/setup-terraform@v4
+      - run: terraform init -input=false
+      - run: terraform apply -input=false -auto-approve -lock-timeout=10m
