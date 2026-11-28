@@ -5,6 +5,7 @@ Each video takes one real error, breaks a real service every way it can fail, an
 
 | Video | Folder |
 |---|---|
+| [Kubernetes Pod Evicted: every cause, reproduced and fixed live](https://youtu.be/HBmxbUFjAyA) | [`evicted/`](evicted/) |
 | [kubectl drain Blocked by a PodDisruptionBudget: every cause, reproduced and fixed live](https://youtu.be/s2DACOfRuUk) | [`pdbdrain/`](pdbdrain/) |
 | [Kubernetes CrashLoopBackOff: 6 real causes, broken and fixed live](https://youtu.be/wVieweYn-cM) | [`crashloopbackoff/`](crashloopbackoff/) |
 | [Kubernetes ImagePullBackOff: every cause, reproduced and fixed live](https://youtu.be/Q9iivK18sqQ) | [`imagepullbackoff/`](imagepullbackoff/) |

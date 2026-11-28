@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-import
+  namespace: shop
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: orders-import}}
+  template:
+    metadata: {labels: {app: orders-import}}
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - {key: kubernetes.io/hostname, operator: In, values: [ck-evict-worker]}
+      containers:
+        - name: import
+          image: ckthedevopsguy/orders-api:1.5.1
+          command: ["python", "-c", "import time; a = bytearray(1500 * 1024 * 1024); time.sleep(3600)"]
+          resources:
+            requests: {memory: 1600Mi, cpu: 100m}
+            limits: {memory: 1600Mi, cpu: 100m}
