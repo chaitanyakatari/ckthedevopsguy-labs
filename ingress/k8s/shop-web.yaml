@@ -1,0 +1,32 @@
+# Healthy shop-web: 2 replicas listening on 0.0.0.0:8080 (container port named http), Service port 80 -> targetPort http.
+# The Service never changes in any scenario (except cause 1's selector): targetPort is always the name http,
+# so the Deployment's containerPort decides the real port. The readiness probe uses the number 8080 on purpose:
+# a wrong containerPort (scenario 4) must not make the pods NotReady (that would be a 503 instead of the 502).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-web
+  namespace: shop
+spec:
+  replicas: 2
+  selector: {matchLabels: {app: shop-web}}
+  template:
+    metadata: {labels: {app: shop-web}}
+    spec:
+      containers:
+        - name: web
+          image: ckthedevopsguy/shop-web:1.0
+          imagePullPolicy: Never
+          ports: [{name: http, containerPort: 8080}]
+          readinessProbe:
+            httpGet: {path: /healthz, port: 8080}
+            periodSeconds: 2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shop-web
+  namespace: shop
+spec:
+  selector: {app: shop-web}
+  ports: [{name: http, port: 80, targetPort: http}]

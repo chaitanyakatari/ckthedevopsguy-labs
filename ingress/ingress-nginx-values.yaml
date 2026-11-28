@@ -1,0 +1,11 @@
+# ingress-nginx chart 4.15.1 (controller v1.15.1) the kind way: hostPort 80 on the node labelled ingress-ready=true
+controller:
+  hostPort: {enabled: true}
+  service: {type: ClusterIP}
+  nodeSelector: {ingress-ready: "true", kubernetes.io/os: linux}
+  updateStrategy: {type: Recreate}
+  watchIngressWithoutClass: true
+  ingressClassResource: {default: true}
+  publishService: {enabled: false}
+  extraArgs: {publish-status-address: localhost}
+  admissionWebhooks: {enabled: false}

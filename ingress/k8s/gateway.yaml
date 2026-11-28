@@ -1,0 +1,43 @@
+# Envoy Gateway v1.10.0: GatewayClass -> EnvoyProxy (NodePort 30080 = host 127.0.0.1:8890) -> Gateway -> HTTPRoute -> shop-web
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: kind-nodeport
+  namespace: envoy-gateway-system
+spec:
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyDeployment:
+        pod:
+          nodeSelector: {ingress-ready: "true"}
+      envoyService:
+        type: NodePort
+        patch:
+          type: StrategicMerge
+          value:
+            spec:
+              ports:
+                - {name: http-80, port: 80, nodePort: 30080}
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: eg
+spec:
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller
+  parametersRef:
+    group: gateway.envoyproxy.io
+    kind: EnvoyProxy
+    name: kind-nodeport
+    namespace: envoy-gateway-system
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: shop
+  namespace: shop
+spec:
+  gatewayClassName: eg
+  listeners:
+    - {name: http, protocol: HTTP, port: 80, allowedRoutes: {namespaces: {from: Same}}}

@@ -1,0 +1,11 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: shop-web
+  namespace: shop
+spec:
+  parentRefs: [{name: shop}]
+  hostnames: [shop.localhost]
+  rules:
+    - backendRefs: [{name: shop-web, port: 80}]
+      timeouts: {request: 30s}

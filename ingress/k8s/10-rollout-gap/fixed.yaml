@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-web
+  namespace: shop
+spec:
+  replicas: 2
+  selector: {matchLabels: {app: shop-web}}
+  template:
+    metadata: {labels: {app: shop-web}}
+    spec:
+      terminationGracePeriodSeconds: 40
+      containers:
+        - name: web
+          image: ckthedevopsguy/shop-web:1.0
+          imagePullPolicy: Never
+          ports: [{name: http, containerPort: 8080}]
+          env:
+            - {name: STARTUP_DELAY, value: "5"}
+            - {name: GRACEFUL, value: "1"}
+          readinessProbe:
+            httpGet: {path: /healthz, port: http}
+            periodSeconds: 2
+          lifecycle:
+            preStop:
+              sleep: {seconds: 10}

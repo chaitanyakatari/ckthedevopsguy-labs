@@ -5,6 +5,7 @@ Each video takes one real error, breaks a real service every way it can fail, an
 
 | Video | Folder |
 |---|---|
+| [Kubernetes Ingress 502, 503, 504: every cause, reproduced and fixed live](https://youtu.be/RBaryU1dW6o) | [`ingress/`](ingress/) |
 | [Kubernetes: 2 more causes, from the comments](https://youtu.be/U8N-DLM4oKc) | [`fromcomments/`](fromcomments/) |
 | [Kubernetes Pod Evicted: every cause, reproduced and fixed live](https://youtu.be/HBmxbUFjAyA) | [`evicted/`](evicted/) |
 | [kubectl drain Blocked by a PodDisruptionBudget: every cause, reproduced and fixed live](https://youtu.be/s2DACOfRuUk) | [`pdbdrain/`](pdbdrain/) |
